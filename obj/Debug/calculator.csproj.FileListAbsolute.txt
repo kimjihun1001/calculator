@@ -1,0 +1,6 @@
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator.csproj.AssemblyReference.cache
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator.csproj.SuggestedBindingRedirects.cache
+C:\Users\kimji\source\repos\calculator\obj\Debug\MainWindow.g.cs
+C:\Users\kimji\source\repos\calculator\obj\Debug\App.g.cs
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator_MarkupCompile.cache
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator_MarkupCompile.lref
