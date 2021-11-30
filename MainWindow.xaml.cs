@@ -26,6 +26,7 @@ namespace calculator
         public static string inputNumber = "";
         public static string lastOperator = "";
         public static bool isEqualPressed = false;
+        public static List<string> historyOfCalculate = new List<string>();
 
         public MainWindow()
         {
@@ -58,11 +59,29 @@ namespace calculator
                 {
 
                 }
+                else if (number == ".")
+                {
+                    inputNumber += number;
+                    result.Text = inputNumber;
+                }
                 else
                 {
                     inputNumber = "";
                     inputNumber += number;
                     result.Text = inputNumber;
+                }
+            }
+            else if (inputNumber.Contains("."))
+            {
+                if (number == ".")
+                {
+
+                }
+                else
+                {
+                    inputNumber += number;
+                    result.Text = inputNumber;
+
                 }
             }
             else if (inputNumber.Length >= 16)
@@ -145,19 +164,22 @@ namespace calculator
                         // 새 input은 두번째에 넣고
                         secondNumber = inputNumber;
 
-                        // 계산
-                        double answer = Calculate();
-                        answerNumber = answer.ToString();
+                        if (Calculate() == "fail")
+                        {
 
-                        // 계산값으로 초기화
-                        firstNumber = answerNumber;
-                        secondNumber = answerNumber;
+                        }
+                        else
+                        {
+                            // 계산값으로 초기화
+                            firstNumber = answerNumber;
+                            secondNumber = answerNumber;
 
-                        formula.Text = firstNumber + operator1;
-                        result.Text = secondNumber;
-                        lastOperator = operator1;
+                            formula.Text = firstNumber + operator1;
+                            result.Text = secondNumber;
+                            lastOperator = operator1;
 
-                        inputNumber = "";
+                            inputNumber = "";
+                        }                           
                     }
                 }
             }
@@ -229,13 +251,8 @@ namespace calculator
         private void clear_Click(object sender, RoutedEventArgs e)  //C 버튼 클릭
         {
             Button button = sender as Button;
-            
-            firstNumber = "0";
-            secondNumber = "";
-            answerNumber = "";
-            inputNumber = "";
-            lastOperator = "";
-            isEqualPressed = false;
+
+            Initialize();
 
             formula.Text = "";
             result.Text = "0";
@@ -245,7 +262,11 @@ namespace calculator
         {
             Button button = sender as Button;
 
-            if (inputNumber[0] == '-')
+            if (inputNumber.Length == 0)
+            {
+
+            }
+            else if (inputNumber[0] == '-')
             {
                 if (inputNumber.Length > 2)
                 {
@@ -295,20 +316,23 @@ namespace calculator
                 // 연산자가 있을 때
                 else
                 {
-                    // 계산
-                    double answer = Calculate();
-                    answerNumber = answer.ToString();
+                    if (Calculate() == "fail")
+                    {
 
-                    // 계산식 보여주기
-                    formula.Text = firstNumber + lastOperator + secondNumber + "=";
+                    }
+                    else
+                    {
+                        // 계산식 보여주기
+                        formula.Text = firstNumber + lastOperator + secondNumber + "=";
 
-                    // 첫번째 숫자만 계산값으로 초기화
-                    firstNumber = answerNumber;
+                        // 첫번째 숫자만 계산값으로 초기화
+                        firstNumber = answerNumber;
 
-                    result.Text = answerNumber;
+                        result.Text = answerNumber;
 
-                    // = 했다는 걸 표시
-                    isEqualPressed = true;
+                        // = 했다는 걸 표시
+                        isEqualPressed = true;
+                    }                       
                 }
             }
             // input 있을 때
@@ -337,67 +361,98 @@ namespace calculator
                         // 새 input은 첫번째에 넣고
                         firstNumber = inputNumber;
 
-                        // 계산
-                        double answer = Calculate();
-                        answerNumber = answer.ToString();
+                        if (Calculate() == "fail")
+                        {
 
-                        // 계산식 보여주기
-                        formula.Text = firstNumber + lastOperator + secondNumber + "=";
+                        }
+                        else
+                        {
+                            // 계산식 보여주기
+                            formula.Text = firstNumber + lastOperator + secondNumber + "=";
 
-                        // 첫번째 숫자만 계산값으로 초기화
-                        firstNumber = answerNumber;
+                            // 첫번째 숫자만 계산값으로 초기화
+                            firstNumber = answerNumber;
 
-                        result.Text = answerNumber;
+                            result.Text = answerNumber;
 
-                        inputNumber = "";
+                            inputNumber = "";
 
-                        // = 했다는 걸 표시
-                        isEqualPressed = true;
+                            // = 했다는 걸 표시
+                            isEqualPressed = true;
+                        }
+
+                           
                     }
                     else
                     {
                         // 새 input은 두번째에 넣고
                         secondNumber = inputNumber;
 
-                        // 계산
-                        double answer = Calculate();
-                        answerNumber = answer.ToString();
+                        if (Calculate() == "fail")
+                        {
 
-                        // 계산식 보여주기
-                        formula.Text = firstNumber + lastOperator + secondNumber + "=";
+                        }
+                        else
+                        {
+                            // 계산식 보여주기
+                            formula.Text = firstNumber + lastOperator + secondNumber + "=";
 
-                        // 첫번째 숫자만 계산값으로 초기화
-                        firstNumber = answerNumber;
+                            // 첫번째 숫자만 계산값으로 초기화
+                            firstNumber = answerNumber;
 
-                        result.Text = answerNumber;
+                            result.Text = answerNumber;
 
-                        inputNumber = "";
+                            inputNumber = "";
 
-                        // = 했다는 걸 표시
-                        isEqualPressed = true;
+                            // = 했다는 걸 표시
+                            isEqualPressed = true;
+                        }
                     }
                 }
             }
         }
 
-        private double Calculate()
+        private string Calculate()
         {
             switch (lastOperator)
             {
                 case "+":
                     double answer = double.Parse(firstNumber) + double.Parse(secondNumber);
-                    return answer;
+                    answerNumber = answer.ToString();
+
+                    // 계산 기록 리스트에 넣기
+                    historyOfCalculate.Add(firstNumber + lastOperator + secondNumber + "=" + answerNumber);
+                    return answerNumber;
                 case "-":
                     answer = double.Parse(firstNumber) - double.Parse(secondNumber);
-                    return answer;
+                    answerNumber = answer.ToString();
+                    historyOfCalculate.Add(firstNumber + lastOperator + secondNumber + "=" + answerNumber);
+                    return answerNumber;
                 case "×":
                     answer = double.Parse(firstNumber) * double.Parse(secondNumber);
-                    return answer;
+                    answerNumber = answer.ToString();
+                    historyOfCalculate.Add(firstNumber + lastOperator + secondNumber + "=" + answerNumber);
+                    return answerNumber;
                 case "÷":
-                    answer = double.Parse(firstNumber) / double.Parse(secondNumber);
-                    return answer;
+                    if (secondNumber == "0" | secondNumber == "")
+                    {
+                        formula.Text = "";
+                        result.Text = "0으로 나눌 수 없습니다";
+                        Initialize();
+                        return "fail";
+                    }
+                    else
+                    {
+                        answer = double.Parse(firstNumber) / double.Parse(secondNumber);
+                        answerNumber = answer.ToString();
+                        historyOfCalculate.Add(firstNumber + lastOperator + secondNumber + "=" + answerNumber);
+                        return answerNumber;
+                    }
                 default:
-                    return 0;
+                    formula.Text = "";
+                    result.Text = "0으로 나눌 수 없습니다";
+                    Initialize();
+                    return "fail";
             }
         }
 
@@ -419,6 +474,39 @@ namespace calculator
                 return inputString;
 
             }
+        }
+
+        private void HistoyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (historyBox.Visibility == Visibility.Hidden)
+            {
+                button.Content = "기록숨기기";
+                historyBox.Visibility = Visibility.Visible;
+
+                foreach (string history in historyOfCalculate)
+                {
+                    historyBox.Content += "\n" + history;
+                }
+            }
+            else
+            {
+                button.Content = "기록보기";
+                historyBox.Visibility = Visibility.Hidden;
+                historyBox.Content = "계산 기록";
+
+            }
+        }
+
+        private void Initialize()
+        {
+            firstNumber = "0";
+            secondNumber = "";
+            answerNumber = "";
+            inputNumber = "";
+            lastOperator = "";
+            isEqualPressed = false;
         }
     }
 }
