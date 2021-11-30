@@ -30,8 +30,8 @@
         <Button Name="delete" Content="BS" HorizontalAlignment="Left" Height="130" Margin="260,135,0,0" VerticalAlignment="Top" Width="130" FontSize="50" Click="delete_Click"/>
         <Button Name="equals" Content="=" HorizontalAlignment="Left" Height="130" Margin="390,655,0,0" VerticalAlignment="Top" Width="130" FontSize="50" Click="equals_Click"/>
 
-        <TextBlock Name="answer" HorizontalAlignment="Left" Height="75" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Margin="0,60,0,0" FontSize="30" Text="0" TextAlignment="Right"/>
-        <TextBlock Name="input" HorizontalAlignment="Left" Height="50" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Margin="0,10,0,0" FontSize="20" TextAlignment="Right"/>
+        <TextBlock Name="result" HorizontalAlignment="Left" Height="75" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Margin="0,60,0,0" FontSize="30" Text="0" TextAlignment="Right"/>
+        <TextBlock Name="formula" HorizontalAlignment="Left" Height="50" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Margin="0,10,0,0" FontSize="20" TextAlignment="Right"/>
 
     </Grid>
 

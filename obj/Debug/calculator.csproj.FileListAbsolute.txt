@@ -4,3 +4,13 @@ C:\Users\kimji\source\repos\calculator\obj\Debug\MainWindow.g.cs
 C:\Users\kimji\source\repos\calculator\obj\Debug\App.g.cs
 C:\Users\kimji\source\repos\calculator\obj\Debug\calculator_MarkupCompile.cache
 C:\Users\kimji\source\repos\calculator\obj\Debug\calculator_MarkupCompile.lref
+C:\Users\kimji\source\repos\calculator\bin\Debug\calculator.exe.config
+C:\Users\kimji\source\repos\calculator\bin\Debug\calculator.exe
+C:\Users\kimji\source\repos\calculator\bin\Debug\calculator.pdb
+C:\Users\kimji\source\repos\calculator\obj\Debug\MainWindow.baml
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator.g.resources
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator.Properties.Resources.resources
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator.csproj.GenerateResource.cache
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator.csproj.CoreCompileInputs.cache
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator.exe
+C:\Users\kimji\source\repos\calculator\obj\Debug\calculator.pdb
